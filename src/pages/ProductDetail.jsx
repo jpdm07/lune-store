@@ -47,7 +47,7 @@ export default function ProductDetail() {
       <div className={styles.page}>
         <div className={styles.grid}>
           <div>
-            <LazyImg src={p.images[imgI]} alt="" className={styles.mainImg} aspect="4/5" />
+            <LazyImg src={p.images[imgI]} alt="" className={styles.mainImg} aspect="4/5" photoTone />
             <div className={styles.thumbs}>
               {p.images.map((src, i) => (
                 <button

@@ -73,6 +73,7 @@
   height: 90px;
   object-fit: cover;
   border-radius: 2px;
+  filter: sepia(0.07) saturate(0.88) contrast(1.04) brightness(1.02);
 }
 
 .meta {

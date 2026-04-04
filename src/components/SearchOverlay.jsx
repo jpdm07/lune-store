@@ -68,7 +68,7 @@ export default function SearchOverlay({ open, onClose }) {
               {results.map((p) => (
                 <li key={p.slug}>
                   <Link to={`/shop/${p.slug}`} className={styles.hit} onClick={onClose}>
-                    <LazyImg src={p.images[0]} alt="" className={styles.th} aspect="1" />
+                    <LazyImg src={p.images[0]} alt="" className={styles.th} aspect="1" photoTone />
                     <div>
                       <div className={styles.pname}>{p.name}</div>
                       <div className={styles.pprice}>${p.price}</div>

@@ -13,7 +13,7 @@ export default function Collections() {
         <div className={styles.grid}>
           {COLLECTIONS.map((c) => (
             <Link key={c.slug} to={`/shop?category=${encodeURIComponent(c.filter)}`} className={styles.card}>
-              <LazyImg src={c.image} alt="" className={styles.img} aspect="4/3" />
+              <LazyImg src={c.image} alt="" className={styles.img} aspect="4/3" photoTone />
               <div className={styles.cap}>
                 <h2 className={styles.name}>{c.title}</h2>
                 <span className={styles.cta}>Shop →</span>

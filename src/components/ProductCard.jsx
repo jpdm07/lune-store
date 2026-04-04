@@ -12,12 +12,13 @@ export default function ProductCard({ product, onAdd }) {
     >
       <Link to={`/shop/${product.slug}`} className={styles.imgLink}>
         <div className={styles.imgWrap}>
-          <LazyImg src={product.images[0]} alt="" className={styles.lazy} aspect="4/5" />
+          <LazyImg src={product.images[0]} alt="" className={styles.lazy} aspect="4/5" photoTone />
           <LazyImg
             src={product.images[1] || product.images[0]}
             alt=""
             className={`${styles.lazy} ${styles.hoverImg}`}
             aspect="4/5"
+            photoTone
           />
         </div>
       </Link>

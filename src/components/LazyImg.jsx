@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './LazyImg.module.css'
 
-export default function LazyImg({ src, alt, className = '', aspect }) {
+export default function LazyImg({ src, alt, className = '', aspect, photoTone = false }) {
   const [loaded, setLoaded] = useState(false)
   return (
     <span className={`${styles.wrap} ${className}`} style={aspect ? { aspectRatio: aspect } : undefined}>
@@ -9,7 +9,7 @@ export default function LazyImg({ src, alt, className = '', aspect }) {
       <img
         src={src}
         alt={alt}
-        className={styles.img}
+        className={`${styles.img}${photoTone ? ` ${styles.photoTone}` : ''}`}
         loading="lazy"
         decoding="async"
         onLoad={() => setLoaded(true)}

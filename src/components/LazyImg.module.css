@@ -34,3 +34,8 @@
   display: block;
   transition: opacity 0.35s ease;
 }
+
+/* Align diverse Unsplash shots with LUNE paper / terracotta palette */
+.photoTone {
+  filter: sepia(0.07) saturate(0.88) contrast(1.04) brightness(1.02);
+}

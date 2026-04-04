@@ -11,9 +11,10 @@ export default function About() {
       </p>
       <div className={styles.img}>
         <LazyImg
-          src="https://images.unsplash.com/photo-1615529182902-48bba69121e6?auto=format&fit=crop&w=1000&q=80"
+          src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=80"
           alt=""
           aspect="16/9"
+          photoTone
         />
       </div>
       <h2>Our materials</h2>

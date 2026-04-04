@@ -13,7 +13,7 @@ const heroImg =
 
 const ig = [
   'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1615529182902-48bba69121e6?auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=600&q=80',
   'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=600&q=80',
   'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80',
   'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80',
@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <PageFade>
       <section className={styles.hero}>
-        <LazyImg src={heroImg} alt="" className={styles.heroImg} />
+        <LazyImg src={heroImg} alt="" className={styles.heroImg} photoTone />
         <div className={styles.heroInner}>
           <motion.p
             className={styles.kicker}
@@ -77,6 +77,7 @@ export default function Home() {
           alt=""
           className={styles.storyImg}
           aspect="4/3"
+          photoTone
         />
         <div>
           <h2 className={styles.h2}>Our story</h2>
@@ -126,7 +127,7 @@ export default function Home() {
 
       <section className={styles.ig}>
         {ig.map((src, i) => (
-          <LazyImg key={i} src={src} alt="" className={styles.igCell} aspect="1" />
+          <LazyImg key={i} src={src} alt="" className={styles.igCell} aspect="1" photoTone />
         ))}
       </section>
 
