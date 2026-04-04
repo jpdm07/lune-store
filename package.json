@@ -2,6 +2,7 @@
   "name": "lune-store",
   "private": true,
   "version": "1.0.0",
+  "description": "Concept e-commerce: slow-living home and lifestyle (LUNE).",
   "type": "module",
   "homepage": "https://jpdm07.github.io/lune-store",
   "repository": {

@@ -1,6 +1,6 @@
-# LUNE — concept skincare store
+# LUNE — concept home & lifestyle store
 
-Calm, editorial e-commerce UI built with **React 19**, **Vite 8**, **React Router 7**, **CSS Modules**, and **Framer Motion**. Deployed to GitHub Pages at [jpdm07.github.io/lune-store](https://jpdm07.github.io/lune-store/) (subpath `/lune-store/`).
+Calm, editorial e-commerce UI for a **slow-living home** brand (everyday objects—textiles, ceramics, and similar goods). Built with **React 19**, **Vite 8**, **React Router 7**, **CSS Modules**, and **Framer Motion**. Deployed to GitHub Pages at [jpdm07.github.io/lune-store](https://jpdm07.github.io/lune-store/) (subpath `/lune-store/`).
 
 ## Run locally
 
