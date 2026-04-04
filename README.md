@@ -18,17 +18,28 @@ npm run preview
 
 `build` runs `vite build` and copies `dist/index.html` → `dist/404.html` for SPA routing on GitHub Pages.
 
-## Deploy
+## Deploy (first time)
 
-1. Create a GitHub repo (e.g. `jpdm07/lune-store`) and add it as `origin`.
-2. Push `main`.
-3. From this directory:
+1. On GitHub, create a **new empty** repository named **`lune-store`** under your account (no README, no license), matching the remote you already have:
+   `https://github.com/jpdm07/lune-store.git`
+2. Push `main`:
+   ```bash
+   git push -u origin main
+   ```
+3. After the first push, open the repo on GitHub → **Actions** and confirm the **Deploy to GitHub Pages** workflow succeeds (it builds and pushes the `gh-pages` branch).
+4. **Settings → Pages** → **Build and deployment** → Source: **Deploy from a branch** → Branch **`gh-pages`** → folder **`/ (root)`** → Save.
+
+The live URL is [https://jpdm07.github.io/lune-store/](https://jpdm07.github.io/lune-store/) (Vite `base` is `/lune-store/`).
+
+### Optional: deploy from your machine
+
+If you prefer not to use Actions:
 
 ```bash
 npm run deploy
 ```
 
-That uses [gh-pages](https://github.com/tschaub/gh-pages) to publish the contents of `dist/` to the `gh-pages` branch. Enable **GitHub Pages** from that branch in the repo settings.
+That uses [gh-pages](https://github.com/tschaub/gh-pages) to publish `dist/` to the `gh-pages` branch (same Pages settings as above).
 
 ## Optional Supabase
 

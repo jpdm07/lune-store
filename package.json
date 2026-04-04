@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "homepage": "https://jpdm07.github.io/lune-store",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jpdm07/lune-store.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/copy-404.mjs",
