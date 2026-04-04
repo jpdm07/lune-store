@@ -20,8 +20,9 @@ npm run preview
 
 ## Deploy (first time)
 
-1. On GitHub, create a **new empty** repository named **`lune-store`** under your account (no README, no license), matching the remote you already have:
-   `https://github.com/jpdm07/lune-store.git`
+1. Create the repo on GitHub (empty: **no** README, **no** .gitignore, **no** license):  
+   **[github.com/new → name it `lune-store`](https://github.com/new?name=lune-store)**  
+   Then confirm the remote matches: `https://github.com/jpdm07/lune-store.git`
 2. Push `main`:
    ```bash
    git push -u origin main
