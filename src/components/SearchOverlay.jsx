@@ -9,7 +9,10 @@ export default function SearchOverlay({ open, onClose }) {
   const [q, setQ] = useState('')
 
   useEffect(() => {
-    if (!open) setQ('')
+    if (!open) {
+      const id = requestAnimationFrame(() => setQ(''))
+      return () => cancelAnimationFrame(id)
+    }
   }, [open])
 
   useEffect(() => {

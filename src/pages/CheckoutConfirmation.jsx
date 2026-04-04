@@ -57,6 +57,7 @@ export default function CheckoutConfirmation() {
     })
     cart.clearCart()
     reset()
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-shot confirmation: snapshot cart once, record order, then clear.
   }, [])
 
   if (!snap) return null

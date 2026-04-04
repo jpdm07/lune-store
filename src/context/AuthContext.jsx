@@ -4,28 +4,31 @@ import { supabase, isSupabaseConfigured } from '../lib/supabase'
 const AuthContext = createContext(null)
 const DEMO_STORAGE = 'lune_demo_user_v1'
 
+function readDemoUser() {
+  try {
+    const raw = localStorage.getItem(DEMO_STORAGE)
+    return raw ? JSON.parse(raw) : null
+  } catch {
+    return null
+  }
+}
+
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(() =>
+    isSupabaseConfigured && supabase ? null : readDemoUser(),
+  )
+  const [loading, setLoading] = useState(Boolean(isSupabaseConfigured && supabase))
 
   useEffect(() => {
-    if (isSupabaseConfigured && supabase) {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        setUser(session?.user ?? null)
-        setLoading(false)
-      })
-      const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-        setUser(session?.user ?? null)
-      })
-      return () => sub.subscription.unsubscribe()
-    }
-    try {
-      const raw = localStorage.getItem(DEMO_STORAGE)
-      if (raw) setUser(JSON.parse(raw))
-    } catch {
-      /* ignore */
-    }
-    setLoading(false)
+    if (!(isSupabaseConfigured && supabase)) return
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null)
+      setLoading(false)
+    })
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setUser(session?.user ?? null)
+    })
+    return () => sub.subscription.unsubscribe()
   }, [])
 
   const signIn = async (email, password) => {
