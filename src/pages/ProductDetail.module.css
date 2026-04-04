@@ -173,6 +173,100 @@
   margin: 8px 0 0;
 }
 
+.revList {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.revLi {
+  margin: 0;
+}
+
+.revCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  background: var(--color-white);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.revCard:hover {
+  border-color: var(--color-base);
+  box-shadow: var(--shadow-soft);
+}
+
+.revCard:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.revCardStars {
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  color: var(--color-accent);
+}
+
+.revCardTitle {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-base);
+}
+
+.revCardExcerpt {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--color-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.revCardMeta {
+  font-size: 0.75rem;
+  color: var(--color-placeholder);
+}
+
+.revCardHint {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-top: 4px;
+}
+
+.revAll {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.revAll:hover {
+  text-decoration: underline;
+}
+
 .more {
   margin-top: 80px;
   padding-top: 48px;

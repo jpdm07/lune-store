@@ -47,6 +47,7 @@ export default function Footer() {
         <div className={styles.col}>
           <h3 className={styles.h}>Help</h3>
           <Link to="/faq">FAQ</Link>
+          <Link to="/reviews">Customer Reviews</Link>
           <Link to="/shipping">Shipping Policy</Link>
           <Link to="/returns">Return Policy</Link>
           <Link to="/contact">Contact Us</Link>

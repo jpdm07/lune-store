@@ -4,6 +4,7 @@ import PageFade from '../components/PageFade'
 import LazyImg from '../components/LazyImg'
 import ProductCard from '../components/ProductCard'
 import { getProductBySlug, getRelated } from '../data/products'
+import { getReviewsByProductSlug, getReviewStatsForProduct, formatReviewDate } from '../data/reviews'
 import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
 import { useToast } from '../context/ToastContext'
@@ -31,6 +32,8 @@ export default function ProductDetail() {
   }
 
   const related = getRelated(slug, 4)
+  const productReviews = getReviewsByProductSlug(p.slug)
+  const { avg, count } = getReviewStatsForProduct(p.slug)
 
   const add = () => {
     for (let i = 0; i < qty; i++) addItem(p, 1)
@@ -101,10 +104,44 @@ export default function ProductDetail() {
               )}
             </div>
 
-            <div className={styles.reviews}>
+            <div className={styles.reviews} id="reviews">
               <h2 className={styles.revH}>Reviews</h2>
-              <p className={styles.stars}>★★★★★</p>
-              <p className={styles.revT}>4.9 average · 127 reviews</p>
+              {avg != null && count > 0 && (
+                <>
+                  <p className={styles.stars} aria-hidden="true">
+                    ★★★★★
+                  </p>
+                  <p className={styles.revT}>
+                    {avg} average · {count} verified {count === 1 ? 'review' : 'reviews'}
+                  </p>
+                </>
+              )}
+              {productReviews.length > 0 && (
+                <>
+                  <ul className={styles.revList}>
+                    {productReviews.map((r) => (
+                      <li key={r.id} className={styles.revLi}>
+                        <Link to={`/reviews#${r.id}`} className={styles.revCard}>
+                          <span className={styles.revCardStars} aria-hidden="true">
+                            {'★'.repeat(r.rating)}
+                            {'☆'.repeat(5 - r.rating)}
+                          </span>
+                          <span className={styles.revCardTitle}>{r.title}</span>
+                          <span className={styles.revCardExcerpt}>{r.body}</span>
+                          <span className={styles.revCardMeta}>
+                            {r.author} · {formatReviewDate(r.date)}
+                            {r.verified ? ' · Verified purchase' : ''}
+                          </span>
+                          <span className={styles.revCardHint}>Read full review →</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link to="/reviews" className={styles.revAll}>
+                    See all customer reviews →
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

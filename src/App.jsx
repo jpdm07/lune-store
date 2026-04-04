@@ -14,6 +14,7 @@ import Shop from './pages/Shop'
 import ProductDetail from './pages/ProductDetail'
 import Collections from './pages/Collections'
 import About from './pages/About'
+import Reviews from './pages/Reviews'
 import Contact from './pages/Contact'
 import FAQ from './pages/FAQ'
 import ReturnPolicy from './pages/ReturnPolicy'
@@ -56,6 +57,7 @@ export default function App() {
                           <Route path="/shop/:slug" element={<ProductDetail />} />
                           <Route path="/collections" element={<Collections />} />
                           <Route path="/about" element={<About />} />
+                        <Route path="/reviews" element={<Reviews />} />
                           <Route path="/contact" element={<Contact />} />
                           <Route path="/faq" element={<FAQ />} />
                           <Route path="/returns" element={<ReturnPolicy />} />
