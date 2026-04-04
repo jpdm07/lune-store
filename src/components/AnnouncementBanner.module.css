@@ -1,0 +1,47 @@
+.bar {
+  background: var(--color-base);
+  color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 10px 40px 10px 16px;
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.msg {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+}
+
+.msg:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.x {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.x:active {
+  transform: translateY(-50%) scale(0.96);
+}

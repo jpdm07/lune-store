@@ -1,0 +1,88 @@
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.imgLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.imgWrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.lazy {
+  border-radius: 2px;
+}
+
+.hoverImg {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.imgWrap:hover .hoverImg {
+  opacity: 1;
+}
+
+.body {
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: 1.05rem;
+  text-decoration: none;
+  color: var(--color-base);
+}
+
+.name:hover {
+  color: var(--color-accent);
+}
+
+.price {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+}
+
+.add {
+  margin-top: 8px;
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  padding: 10px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-base);
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.add:hover {
+  border-color: var(--color-base);
+}
+
+.add:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .add {
+    min-height: 44px;
+  }
+}

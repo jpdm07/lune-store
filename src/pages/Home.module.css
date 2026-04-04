@@ -1,0 +1,250 @@
+.hero {
+  position: relative;
+  min-height: min(88vh, 720px);
+  display: flex;
+  align-items: flex-end;
+}
+
+.heroImg {
+  position: absolute;
+  inset: 0;
+}
+
+.heroImg :global(.wrap),
+.heroImg :global(img) {
+  width: 100%;
+  height: 100%;
+}
+
+.heroImg :global(img) {
+  object-fit: cover;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  padding: 48px 24px 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  background: linear-gradient(to top, rgba(250, 248, 245, 0.96), transparent);
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 16px;
+}
+
+.h1 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 3.75rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0 0 28px;
+  max-width: 12ch;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 32px;
+  background: var(--color-base);
+  color: var(--color-bg);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.cta:active {
+  transform: scale(0.98);
+}
+
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 24px;
+}
+
+.h2 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 36px;
+}
+
+.h2center {
+  composes: h2;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.story {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.storyImg {
+  border-radius: 2px;
+}
+
+.p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-muted);
+  margin: 0 0 20px;
+}
+
+.pcenter {
+  composes: p;
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto 28px;
+}
+
+.link {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.why {
+  background: var(--color-surface);
+  padding: 72px 24px;
+}
+
+.cols3 {
+  max-width: 1000px;
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.h3 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+
+.rowHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.rowHead .h2 {
+  margin: 0;
+}
+
+.hscroll {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+}
+
+.hcard {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+}
+
+.ig {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+}
+
+.igCell :global(.wrap) {
+  aspect-ratio: 1;
+}
+
+.news {
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.newsForm {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.newsForm input {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  font-size: 1rem;
+}
+
+.newsForm input:focus {
+  outline: none;
+  border-color: var(--color-base);
+  box-shadow: 0 0 0 3px rgba(28, 25, 23, 0.1);
+}
+
+.newsForm button {
+  padding: 14px 28px;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .grid4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ig {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .story {
+    grid-template-columns: 1fr;
+  }
+  .cols3 {
+    grid-template-columns: 1fr;
+  }
+  .grid4 {
+    grid-template-columns: 1fr;
+  }
+}

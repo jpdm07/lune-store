@@ -1,0 +1,39 @@
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+.h1 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 28px;
+}
+
+.body {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-muted);
+}
+
+.body h2 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-base);
+  margin: 36px 0 12px;
+}
+
+.body p {
+  margin: 0 0 16px;
+}
+
+.body ul {
+  margin: 0 0 16px;
+  padding-left: 1.25rem;
+}
+
+.body a {
+  color: var(--color-accent);
+}
