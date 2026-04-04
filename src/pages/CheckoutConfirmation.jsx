@@ -66,7 +66,7 @@ export default function CheckoutConfirmation() {
     <PageFade>
       <div className={styles.confirm}>
         <motion.div
-          className={styles.check}
+          className={styles.successMark}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 260, damping: 18 }}
