@@ -64,6 +64,9 @@ export default function Header({ onOpenSearch, onOpenCart }) {
           <NavLink to="/collections" onClick={() => setOpenMenu(false)}>
             Collections
           </NavLink>
+          <NavLink to="/reviews" onClick={() => setOpenMenu(false)}>
+            Reviews
+          </NavLink>
           <NavLink to="/about" onClick={() => setOpenMenu(false)}>
             About
           </NavLink>
