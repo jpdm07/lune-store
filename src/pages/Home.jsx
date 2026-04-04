@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <PageFade>
       <section className={styles.hero}>
-        <LazyImg src={heroImg} alt="" className={styles.heroImg} photoTone />
+        <LazyImg src={heroImg} alt="" className={styles.heroImg} photoTone eager />
         <div className={styles.heroInner}>
           <motion.p
             className={styles.kicker}
