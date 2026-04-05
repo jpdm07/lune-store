@@ -80,8 +80,10 @@ export default function CheckoutConfirmation() {
           <h2 className={styles.sideH}>Order summary</h2>
           <ul className={styles.sumList}>
             {snap.items.map((l) => (
-              <li key={l.slug}>
-                {l.name} × {l.qty} — ${(l.price * l.qty).toFixed(2)}
+              <li key={l.id || `${l.slug}-${l.colorId || 'natural'}`}>
+                {l.name}
+                {l.colorLabel && l.colorLabel !== 'Natural' ? ` (${l.colorLabel})` : ''} × {l.qty} — $
+                {(l.price * l.qty).toFixed(2)}
               </li>
             ))}
           </ul>

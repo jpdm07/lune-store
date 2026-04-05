@@ -2,6 +2,8 @@ import { useState } from 'react'
 import PageFade from '../components/PageFade'
 import styles from './Contact.module.css'
 
+const STUDIO_EMAIL_DISPLAY = 'hello@lunehomestudio.com'
+
 export default function Contact() {
   const [sent, setSent] = useState(false)
 
@@ -24,10 +26,15 @@ export default function Contact() {
               <br />
               Sun 12pm–5pm EST
             </p>
-            <h2 className={styles.h2}>Email & phone</h2>
+            <h2 className={styles.h2}>Studio inbox</h2>
             <p>
-              <a href="mailto:jpdm07@yahoo.com">jpdm07@yahoo.com</a>
+              <span className={styles.brandEmail}>{STUDIO_EMAIL_DISPLAY}</span>
               <br />
+              <span className={styles.emailHint}>
+                Use the form — messages route to our studio team the same way.
+              </span>
+            </p>
+            <p>
               <a href="tel:+12125550147">(212) 555-0147</a>
             </p>
             <div className={styles.map} aria-hidden>

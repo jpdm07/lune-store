@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import PageFade from '../components/PageFade'
 import LazyImg from '../components/LazyImg'
@@ -15,10 +15,17 @@ export default function ProductDetail() {
   const p = getProductBySlug(slug)
   const [imgI, setImgI] = useState(0)
   const [qty, setQty] = useState(1)
+  const [colorId, setColorId] = useState('natural')
   const [open, setOpen] = useState({ d: true, m: false, s: false })
   const { addItem } = useCart()
   const { toggle, has } = useWishlist()
   const { toast } = useToast()
+
+  useEffect(() => {
+    setImgI(0)
+    setQty(1)
+    setColorId('natural')
+  }, [slug])
 
   if (!p) {
     return (
@@ -36,7 +43,7 @@ export default function ProductDetail() {
   const { avg, count } = getReviewStatsForProduct(p.slug)
 
   const add = () => {
-    for (let i = 0; i < qty; i++) addItem(p, 1)
+    for (let i = 0; i < qty; i++) addItem(p, 1, { colorId: p.colors ? colorId : 'natural' })
     toast('Added to cart')
   }
 
@@ -68,6 +75,25 @@ export default function ProductDetail() {
             <h1 className={styles.name}>{p.name}</h1>
             <p className={styles.price}>${p.price}</p>
             <p className={styles.desc}>{p.description}</p>
+            {p.colors && p.colors.length > 0 && (
+              <div className={styles.colorBlock}>
+                <span className={styles.colorLabel}>Color</span>
+                <div className={styles.colorSwatches} role="listbox" aria-label="Color">
+                  {p.colors.map((c) => (
+                    <button
+                      key={c.id}
+                      type="button"
+                      role="option"
+                      aria-selected={colorId === c.id}
+                      className={colorId === c.id ? styles.colorOn : styles.colorBtn}
+                      onClick={() => setColorId(c.id)}
+                    >
+                      {c.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className={styles.qty}>
               <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))}>
                 −

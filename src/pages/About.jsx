@@ -17,6 +17,20 @@ export default function About() {
           photoTone
         />
       </div>
+      <h2>Why LUNE exists</h2>
+      <p>
+        LUNE began with founder <strong>Jane Chavez</strong>—a first-generation immigrant from the Philippines who
+        built a life in the U.S. while carrying the memory of growing up with very little. Self-supporting from an
+        early age, she learned to treat every purchase as a choice: fewer things, chosen carefully, meant to last.
+        That mindset became the store: objects that earn their place in your day, not clutter that shouts for
+        attention.
+      </p>
+      <p>
+        The name <em>LUNE</em> nods to quiet light—the kind that fills a room at dawn and makes ordinary corners
+        feel calm. The curation is personal: linen that softens, ceramics that feel honest in the hand, wool that
+        warms without weight. Nothing is here to impress a trend cycle; it is here because it could stay with you
+        for years.
+      </p>
       <h2>Our materials</h2>
       <p>
         <strong>Linen</strong> — breathable, relaxed, better with age.
@@ -31,10 +45,10 @@ export default function About() {
         <li>Natural materials — no performative “green,” just real choices.</li>
         <li>Made to last — objects you keep, not replace every season.</li>
       </ul>
-      <h2>Team</h2>
+      <h2>Studio</h2>
       <p>
         LUNE is a small studio based in New York. We work directly with makers and mills we trust. This page stays
-        minimal on purpose—the work is in the objects.
+        minimal on purpose—the story lives in the objects, and in the care behind them.
       </p>
     </StaticPage>
   )

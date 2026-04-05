@@ -38,24 +38,29 @@ export default function Cart() {
         <div className={styles.layout}>
           <ul className={styles.list}>
             {items.map((line) => (
-              <li key={line.slug} className={styles.row}>
-                <img src={line.image} alt="" className={styles.thumb} />
+              <li key={line.id} className={styles.row}>
+                <Link to={`/shop/${line.slug}`} className={styles.thumbLink} aria-label={`View ${line.name}`}>
+                  <img src={line.image} alt="" className={styles.thumb} />
+                </Link>
                 <div className={styles.meta}>
                   <Link to={`/shop/${line.slug}`} className={styles.name}>
                     {line.name}
                   </Link>
+                  {line.colorLabel && line.colorLabel !== 'Natural' && (
+                    <p className={styles.variant}>{line.colorLabel}</p>
+                  )}
                   <p className={styles.price}>${line.price}</p>
                   <div className={styles.qty}>
-                    <button type="button" onClick={() => updateQty(line.slug, line.qty - 1)}>
+                    <button type="button" onClick={() => updateQty(line.id, line.qty - 1)}>
                       −
                     </button>
                     <span>{line.qty}</span>
-                    <button type="button" onClick={() => updateQty(line.slug, line.qty + 1)}>
+                    <button type="button" onClick={() => updateQty(line.id, line.qty + 1)}>
                       +
                     </button>
                   </div>
                 </div>
-                <button type="button" className={styles.rm} onClick={() => removeItem(line.slug)} aria-label="Remove">
+                <button type="button" className={styles.rm} onClick={() => removeItem(line.id)} aria-label="Remove">
                   ×
                 </button>
               </li>

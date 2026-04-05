@@ -5,6 +5,15 @@
 const u = (id, w = 900) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`
 
+/** Swatches for woven / natural-fiber pieces (concept SKUs — same imagery, choice at checkout). */
+export const FABRIC_COLORS = [
+  { id: 'natural', label: 'Natural' },
+  { id: 'oat', label: 'Oat' },
+  { id: 'stone', label: 'Stone' },
+  { id: 'sage', label: 'Sage' },
+  { id: 'midnight', label: 'Midnight' },
+]
+
 export const PRODUCTS = [
   {
     id: 'p1',
@@ -12,11 +21,12 @@ export const PRODUCTS = [
     name: 'Linen Tote',
     price: 38,
     category: 'Carry',
+    colors: FABRIC_COLORS,
     description:
       'Natural undyed linen with double-stitched handles. Light enough for daily carry, strong enough for market runs.',
     materials:
       '100% European flax linen. Spot clean; cold wash separately when needed. Line dry.',
-    images: [u('photo-1709303014108-5d988f63864f'), u('photo-1698834318982-f9c5b35dc90a')],
+    images: [u('photo-1698834318982-f9c5b35dc90a')],
     stock: 40,
   },
   {
@@ -25,9 +35,10 @@ export const PRODUCTS = [
     name: 'Cotton Throw',
     price: 62,
     category: 'Bedding',
+    colors: FABRIC_COLORS,
     description: 'Woven cotton in a soft herringbone. Oatmeal tone, generous drape for sofa or bed.',
     materials: '100% cotton. Machine wash cold, tumble low.',
-    images: [u('photo-1598622444660-9d76ceeb7daf'), u('photo-1620832401018-30259b006ffe')],
+    images: [u('photo-1620832401018-30259b006ffe'), u('photo-1598622444660-9d76ceeb7daf')],
     stock: 55,
   },
   {
@@ -47,9 +58,10 @@ export const PRODUCTS = [
     name: 'Wool Blanket',
     price: 95,
     category: 'Bedding',
+    colors: FABRIC_COLORS,
     description: 'Merino wool in an earthy sand tone with a subtle fringe edge. Warm without weight.',
     materials: '100% merino wool. Dry clean recommended.',
-    images: [u('photo-1638431110087-80c185015f94'), u('photo-1629301203564-850c7d40f46e')],
+    images: [u('photo-1638431110087-80c185015f94')],
     stock: 28,
   },
   {
@@ -58,6 +70,7 @@ export const PRODUCTS = [
     name: 'Linen Pillowcase Set',
     price: 58,
     category: 'Bedding',
+    colors: FABRIC_COLORS,
     description: 'Two pillowcases in stonewashed linen. Natural tone, breathable for sleep.',
     materials: '100% linen. Machine wash cold, tumble low.',
     images: [u('photo-1609587611471-be23d7344d81'), u('photo-1721073956820-644a71ba075e')],
@@ -71,7 +84,7 @@ export const PRODUCTS = [
     category: 'Kitchen',
     description: 'Matte white with subtle texture. Stackable, everyday dinnerware.',
     materials: 'Stoneware. Dishwasher and microwave safe.',
-    images: [u('photo-1623682522867-ef176aa9c883'), u('photo-1591632288574-a387f820a1ca')],
+    images: [u('photo-1591632288574-a387f820a1ca'), u('photo-1623682522867-ef176aa9c883')],
     stock: 80,
   },
   {
@@ -80,6 +93,7 @@ export const PRODUCTS = [
     name: 'Linen Napkin Set',
     price: 44,
     category: 'Kitchen',
+    colors: FABRIC_COLORS,
     description: 'Set of four napkins with a minimalist hem. Natural linen.',
     materials: '100% linen. Machine wash cold.',
     images: [u('photo-1596433904500-97b901c5d274'), u('photo-1705290304352-4beef0b626b3')],
@@ -112,10 +126,11 @@ export const PRODUCTS = [
     slug: 'cotton-robe',
     name: 'Cotton Robe',
     price: 88,
-    category: 'Bedding',
+    category: 'Loungewear',
+    colors: FABRIC_COLORS,
     description: 'Waffle knit cotton robe with belt tie. One size, natural undyed tone.',
     materials: '100% cotton. Machine wash cold, tumble low.',
-    images: [u('photo-1770294759101-fae1377d4d34'), u('photo-1645828258540-4bdc95e904cc')],
+    images: [u('photo-1562157873-18bcce99693d'), u('photo-1631217868264-e5b90bb7e133')],
     stock: 22,
   },
   {
@@ -124,9 +139,10 @@ export const PRODUCTS = [
     name: 'Woven Market Bag',
     price: 42,
     category: 'Carry',
+    colors: FABRIC_COLORS,
     description: 'Seagrass weave with leather handles. Structured base, farmers-market ready.',
     materials: 'Seagrass, leather handles. Wipe clean; avoid prolonged moisture.',
-    images: [u('photo-1759150307882-329480e1384f'), u('photo-1627202626612-1e304a201b32')],
+    images: [u('photo-1627202626612-1e304a201b32')],
     stock: 38,
   },
   {
@@ -135,6 +151,7 @@ export const PRODUCTS = [
     name: 'Linen Table Runner',
     price: 36,
     category: 'Kitchen',
+    colors: FABRIC_COLORS,
     description: '14 × 72 inches, stonewashed linen with fringe ends.',
     materials: '100% linen. Machine wash cold, line dry preferred.',
     images: [u('photo-1762539747176-5d8f166346de'), u('photo-1758810744738-6eebece715a9')],
@@ -147,6 +164,12 @@ export const COLLECTIONS = [
   { slug: 'kitchen', title: 'Kitchen & Table', filter: 'Kitchen', image: u('photo-1545874239-30867bd8f206') },
   { slug: 'carry', title: 'Carry', filter: 'Carry', image: u('photo-1709303014108-5d988f63864f') },
   { slug: 'bedding', title: 'Bedding & Bath', filter: 'Bedding', image: u('photo-1721073956820-644a71ba075e') },
+  {
+    slug: 'loungewear',
+    title: 'Loungewear',
+    filter: 'Loungewear',
+    image: u('photo-1562157873-18bcce99693d'),
+  },
 ]
 
 export function getProductBySlug(slug) {

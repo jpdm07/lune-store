@@ -44,7 +44,7 @@ export default function Shop() {
         <div className={styles.layout}>
           <aside className={styles.side}>
             <h2 className={styles.sideH}>Category</h2>
-            {['All', 'Home', 'Kitchen', 'Carry', 'Bedding'].map((c) => (
+            {['All', 'Home', 'Kitchen', 'Carry', 'Bedding', 'Loungewear'].map((c) => (
               <button
                 key={c}
                 type="button"
