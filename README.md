@@ -1,51 +1,35 @@
-# LUNE — concept home & lifestyle store
+# LUNE — Concept home & lifestyle store
 
-Calm, editorial e-commerce UI for a **slow-living home** brand (everyday objects—textiles, ceramics, and similar goods). Built with **React 19**, **Vite 8**, **React Router 7**, **CSS Modules**, and **Framer Motion**. Deployed to GitHub Pages at [jpdm07.github.io/lune-store](https://jpdm07.github.io/lune-store/) (subpath `/lune-store/`).
+**Live site:** [jpdm07.github.io/lune-store](https://jpdm07.github.io/lune-store/)  
+**Portfolio case study:** [LUNE case study](https://jpdm07.github.io/portfolio-website/lune-case-study.html) (goals, Figma prototype embed, build/deploy narrative)
 
-## Run locally
+LUNE is a **concept e-commerce SPA** for a slow-living home brand—textiles, ceramics, and everyday objects—designed and implemented as a single cohesive product story rather than a skin on a generic template. The goal was to ship **real shopping flows** (discovery through checkout), **trust and policy content**, and a **signed-in account area** with the same editorial calm as the brand: warm neutrals, serif headlines, monospace wayfinding, and motion that supports the UI instead of competing with it.
 
-```bash
-npm install
-npm run dev
-```
+## What I owned
 
-## Build & preview
+- **Product & UX:** Information architecture and journeys from shop grid → product detail → cart → shipping → payment → confirmation, plus FAQ, contact, shipping/returns/legal pages, and account subflows (orders, returns, wishlist, addresses, profile).
+- **UI implementation:** React components with **CSS Modules** and design tokens (CSS custom properties) kept aligned with a **Figma** prototype so layout, type scale, and hierarchy do not drift after handoff.
+- **Front-end architecture:** **React Router** for public, checkout, auth, and nested account routes; **context** for cart, wishlist, checkout draft, orders, auth, toasts, and related state so screens stay mostly layout, copy, and wiring.
+- **Polish:** Search overlay, cart drawer (desktop), announcement bar, toasts, empty/error states, and **Framer Motion** for route-level motion.
 
-```bash
-npm run build
-npm run preview
-```
+## Technical summary
 
-`build` runs `vite build` and copies `dist/index.html` → `dist/404.html` for SPA routing on GitHub Pages.
+| Area | Choices |
+|------|--------|
+| **Runtime** | React 19, Vite 8 |
+| **Routing** | React Router 7 (`BrowserRouter` with repo `basename` for GitHub Pages) |
+| **Styling** | CSS Modules + shared variables |
+| **Data** | Optional **Supabase** (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`); if unset, **demo mode** persists cart/account-style data in `localStorage` so the app is fully explorable without a backend |
+| **Hosting** | Static build to **GitHub Pages** (`gh-pages` branch); build copies `index.html` → `404.html` so deep links and refreshes on client routes still resolve |
 
-## Deploy (first time)
+## What this repo demonstrates
 
-1. Create the repo on GitHub (empty: **no** README, **no** .gitignore, **no** license):  
-   **[github.com/new → name it `lune-store`](https://github.com/new?name=lune-store)**  
-   Then confirm the remote matches: `https://github.com/jpdm07/lune-store.git`
-2. Push `main`:
-   ```bash
-   git push -u origin main
-   ```
-3. After the first push, open the repo on GitHub → **Actions** and confirm the **Deploy to GitHub Pages** workflow succeeds (it builds and pushes the `gh-pages` branch).
-4. **Settings → Pages** → **Build and deployment** → Source: **Deploy from a branch** → Branch **`gh-pages`** → folder **`/ (root)`** → Save.
-
-The live URL is [https://jpdm07.github.io/lune-store/](https://jpdm07.github.io/lune-store/) (Vite `base` is `/lune-store/`).
-
-### Optional: deploy from your machine
-
-If you prefer not to use Actions:
-
-```bash
-npm run deploy
-```
-
-That uses [gh-pages](https://github.com/tschaub/gh-pages) to publish `dist/` to the `gh-pages` branch (same Pages settings as above).
-
-## Optional Supabase
-
-Copy `.env.example` to `.env` and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`. If they are missing, the app runs in **demo mode** with data in `localStorage`. Schema starter: `supabase/schema.sql`.
+End-to-end **e-commerce UX** and **production-minded SPA delivery**: protected routes, multi-step checkout with shared state, optional real backend vs. offline demo, and Pages-specific concerns (base path, asset URLs, SPA fallback) handled deliberately—not as an afterthought.
 
 ## License
 
 Private portfolio project.
+
+---
+
+*Jane Chavez — front-end development & UI/UX. M.S. Software Engineering, University of Houston–Clear Lake.*

@@ -8,7 +8,8 @@ on:
     branches: [main]
   workflow_dispatch:
 
-run-name: Deploy LUNE to Pages (${{ github.ref_name }}, ${{ github.event_name }})
+# Surface the triggering commit subject on push so Actions history reads like real work, not a generic deploy.
+run-name: ${{ github.event_name == 'workflow_dispatch' && 'Deploy LUNE storefront (manual run)' || github.event.head_commit.message }}
 
 permissions:
   contents: write
@@ -45,7 +46,8 @@ jobs:
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
           full_commit_message: |
-            Deploy: LUNE storefront production build
+            gh-pages: production build from ${{ github.sha }}
 
-            Triggered by ${{ github.actor }} via ${{ github.event_name }} on ${{ github.ref_name }}.
-            Source commit: ${{ github.sha }}
+            Source (main): ${{ github.event.head_commit.message || '—' }}
+
+            Trigger: ${{ github.event_name }} by ${{ github.actor }} · ref ${{ github.ref_name }}
