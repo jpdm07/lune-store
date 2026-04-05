@@ -1,6 +1,8 @@
 /**
  * Product imagery: Unsplash (https://unsplash.com/license).
  * Each photo is chosen to match the product name; a light warm filter is applied in CSS for a cohesive LUNE palette.
+ *
+ * Optional `specs`: label/value rows shown on the PDP (dimensions, contents, capacity, etc.).
  */
 const u = (id, w = 900) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`
@@ -49,6 +51,12 @@ export const PRODUCTS = [
     materials:
       '100% European flax linen. Spot clean; cold wash separately when needed. Line dry.',
     images: [LINEN_TOTE_COVER],
+    specs: [
+      { label: 'Dimensions', value: '15" W × 16" H × 5" D (38 × 41 × 13 cm)' },
+      { label: 'Handle drop', value: 'Approx. 11" (28 cm)' },
+      { label: 'Weight (empty)', value: 'Approx. 8 oz (230 g)' },
+      { label: 'Origin', value: 'Designed in the U.S.; sewn in Portugal' },
+    ],
     stock: 40,
   },
   {
@@ -62,6 +70,11 @@ export const PRODUCTS = [
     materials: '100% cotton. Machine wash cold, tumble low.',
     images: [u('photo-1620832401018-30259b006ffe'), u('photo-1598622444660-9d76ceeb7daf')],
     colorToImage: { natural: 0, mauve: 1 },
+    specs: [
+      { label: 'Dimensions', value: '50" × 70" (127 × 178 cm)' },
+      { label: 'Weight', value: 'Approx. 2.8 lb (1.3 kg)' },
+      { label: 'Contents', value: 'One throw' },
+    ],
     stock: 55,
   },
   {
@@ -73,6 +86,11 @@ export const PRODUCTS = [
     description: 'Hand-finished stoneware with a matte glaze. Holds 12 oz; comfortable lip and handle.',
     materials: 'Stoneware, food-safe glaze. Dishwasher safe; microwave safe.',
     images: [u('photo-1514228742587-6b1558fcca3d'), u('photo-1612285761051-d5eef9e88e86')],
+    specs: [
+      { label: 'Capacity', value: '12 fl oz (355 ml)' },
+      { label: 'Dimensions', value: 'Approx. 3.5" H × 3.25" dia (9 × 8.3 cm)' },
+      { label: 'Contents', value: 'One mug' },
+    ],
     stock: 120,
   },
   {
@@ -85,6 +103,11 @@ export const PRODUCTS = [
     description: 'Merino wool in an earthy sand tone with a subtle fringe edge. Warm without weight.',
     materials: '100% merino wool. Dry clean recommended.',
     images: [u('photo-1638431110087-80c185015f94')],
+    specs: [
+      { label: 'Dimensions', value: '60" × 80" (152 × 203 cm)' },
+      { label: 'Weight', value: 'Approx. 2.5 lb (1.1 kg)' },
+      { label: 'Contents', value: 'One blanket' },
+    ],
     stock: 28,
   },
   {
@@ -99,6 +122,11 @@ export const PRODUCTS = [
     images: [u('photo-1609587611471-be23d7344d81'), u('photo-1721073956820-644a71ba075e')],
     colorToImage: { midnight: 0, natural: 1 },
     defaultColorImageIndex: 0,
+    specs: [
+      { label: 'Includes', value: '2 pillowcases' },
+      { label: 'Fits pillows up to', value: '20" × 30" (51 × 76 cm) — standard / queen' },
+      { label: 'Closure', value: 'Envelope opening' },
+    ],
     stock: 44,
   },
   {
@@ -110,6 +138,11 @@ export const PRODUCTS = [
     description: 'Matte white with subtle texture. Stackable, everyday dinnerware.',
     materials: 'Stoneware. Dishwasher and microwave safe.',
     images: [u('photo-1591632288574-a387f820a1ca'), u('photo-1623682522867-ef176aa9c883')],
+    specs: [
+      { label: 'Diameter', value: '10.5" (27 cm)' },
+      { label: 'Height', value: 'Approx. 1" (2.5 cm)' },
+      { label: 'Contents', value: 'One plate' },
+    ],
     stock: 80,
   },
   {
@@ -123,6 +156,11 @@ export const PRODUCTS = [
     materials: '100% linen. Machine wash cold.',
     images: [u('photo-1596433904500-97b901c5d274'), u('photo-1705290304352-4beef0b626b3')],
     colorToImage: { oat: 1 },
+    specs: [
+      { label: 'Includes', value: '4 napkins' },
+      { label: 'Each napkin', value: '18" × 18" (46 × 46 cm)' },
+      { label: 'Hem', value: 'Mitered corners, narrow hem' },
+    ],
     stock: 60,
   },
   {
@@ -133,9 +171,13 @@ export const PRODUCTS = [
     category: 'Home',
     description: 'Unscented beeswax, cotton wick. ~40 hour burn, soft honeyed glow.',
     materials: 'Pure beeswax, cotton wick. Trim wick to ¼" before each use.',
-    images: [
-      u('photo-1771911434558-6b85496cf608'),
-      u('photo-1608263153703-caa6b0fd7bc7'),
+    images: [u('photo-1771911434558-6b85496cf608')],
+    specs: [
+      { label: 'Dimensions', value: 'Approx. 3" dia × 4" H (7.6 × 10 cm) pillar' },
+      { label: 'Burn time', value: 'Up to ~40 hours (varies with draft & trim)' },
+      { label: 'Scent', value: 'Unscented (natural beeswax note only)' },
+      { label: 'Wick', value: '100% cotton, lead-free' },
+      { label: 'Contents', value: 'One candle' },
     ],
     stock: 90,
   },
@@ -148,6 +190,11 @@ export const PRODUCTS = [
     description: 'Organic silhouette with matte terracotta glaze. Sized for a small bouquet.',
     materials: 'Stoneware. Wipe clean; not dishwasher recommended.',
     images: [u('photo-1660958639203-cbc9bb56955b'), u('photo-1584515453937-c00929e621d1')],
+    specs: [
+      { label: 'Height', value: 'Approx. 8" (20 cm)' },
+      { label: 'Opening', value: 'Approx. 4" (10 cm) diameter' },
+      { label: 'Contents', value: 'One vase' },
+    ],
     stock: 35,
   },
   {
@@ -163,6 +210,12 @@ export const PRODUCTS = [
       u('photo-1645828258540-4bdc95e904cc'),
       u('photo-1759221778500-84537e318452'),
     ],
+    specs: [
+      { label: 'Fit', value: "One size — best for women's S–L / men's S–M" },
+      { label: 'Length', value: 'Approx. 48" (122 cm) from shoulder' },
+      { label: 'Features', value: 'Attached belt, patch pockets, waffle knit' },
+      { label: 'Contents', value: 'One robe' },
+    ],
     stock: 22,
   },
   {
@@ -175,6 +228,11 @@ export const PRODUCTS = [
     description: 'Seagrass weave with leather handles. Structured base, farmers-market ready.',
     materials: 'Seagrass, leather handles. Wipe clean; avoid prolonged moisture.',
     images: [LINEN_TOTE_COVER, u('photo-1627202626612-1e304a201b32')],
+    specs: [
+      { label: 'Dimensions', value: '16" W × 12" H × 7" D (41 × 30 × 18 cm) body' },
+      { label: 'Handle drop', value: 'Approx. 9" (23 cm)' },
+      { label: 'Contents', value: 'One bag' },
+    ],
     stock: 38,
   },
   {
@@ -189,6 +247,11 @@ export const PRODUCTS = [
     images: [u('photo-1762539747176-5d8f166346de'), u('photo-1758810744738-6eebece715a9')],
     colorToImage: { stone: 0, sage: 1 },
     defaultColorImageIndex: 0,
+    specs: [
+      { label: 'Dimensions', value: '14" W × 72" L (36 × 183 cm)' },
+      { label: 'Fringe', value: 'Approx. 1" at each end' },
+      { label: 'Contents', value: 'One runner' },
+    ],
     stock: 48,
   },
 ]

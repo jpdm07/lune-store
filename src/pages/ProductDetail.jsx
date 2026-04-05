@@ -65,23 +65,44 @@ export default function ProductDetail() {
         <div className={styles.grid}>
           <div>
             <LazyImg src={p.images[imgI]} alt="" className={styles.mainImg} aspect="4/5" photoTone />
-            <div className={styles.thumbs}>
-              {p.images.map((src, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  className={i === imgI ? styles.thOn : styles.th}
-                  onClick={() => setImgI(i)}
-                >
-                  <img src={src} alt="" />
-                </button>
-              ))}
-            </div>
+            {p.images.length > 1 && (
+              <div className={styles.thumbs}>
+                {p.images.map((src, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    className={i === imgI ? styles.thOn : styles.th}
+                    onClick={() => setImgI(i)}
+                  >
+                    <img src={src} alt="" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
           <div>
             <h1 className={styles.name}>{p.name}</h1>
             <p className={styles.price}>${p.price}</p>
             <p className={styles.desc}>{p.description}</p>
+            {p.stock != null && (
+              <p className={p.stock > 0 ? styles.stock : styles.stockOut}>
+                {p.stock > 0
+                  ? p.stock <= 10
+                    ? `In stock — only ${p.stock} left`
+                    : 'In stock'
+                  : 'Currently out of stock'}
+              </p>
+            )}
+            {Array.isArray(p.specs) && p.specs.length > 0 && (
+              <dl className={styles.specs} aria-label="Product details">
+                {p.specs.map((row) => (
+                  <div key={row.label} className={styles.specRow}>
+                    <dt>{row.label}</dt>
+                    <dd>{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
             {p.colors && p.colors.length > 0 && (
               <div className={styles.colorBlock}>
                 <span className={styles.colorLabel}>Color</span>
