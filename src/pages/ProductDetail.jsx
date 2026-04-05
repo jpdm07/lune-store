@@ -85,13 +85,21 @@ export default function ProductDetail() {
                       type="button"
                       role="option"
                       aria-selected={colorId === c.id}
-                      className={colorId === c.id ? styles.colorOn : styles.colorBtn}
+                      title={c.label}
+                      aria-label={c.label}
+                      className={colorId === c.id ? styles.colorSwatchOn : styles.colorSwatch}
                       onClick={() => setColorId(c.id)}
                     >
-                      {c.label}
+                      <span
+                        className={styles.swatchFill}
+                        style={{ backgroundColor: c.hex ?? '#d6d3d1' }}
+                      />
                     </button>
                   ))}
                 </div>
+                <span className={styles.colorPicked} aria-live="polite">
+                  {p.colors.find((c) => c.id === colorId)?.label}
+                </span>
               </div>
             )}
             <div className={styles.qty}>

@@ -5,14 +5,19 @@
 const u = (id, w = 900) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`
 
-/** Swatches for woven / natural-fiber pieces (concept SKUs — same imagery, choice at checkout). */
+/**
+ * Fabric color options — `hex` drives the round swatch on the product page.
+ * (Concept SKUs; imagery stays the same per product.)
+ */
 export const FABRIC_COLORS = [
-  { id: 'natural', label: 'Natural' },
-  { id: 'oat', label: 'Oat' },
-  { id: 'stone', label: 'Stone' },
-  { id: 'sage', label: 'Sage' },
-  { id: 'midnight', label: 'Midnight' },
+  { id: 'natural', label: 'Natural', hex: '#e8dfd4' },
+  { id: 'oat', label: 'Oat', hex: '#d4c4b0' },
+  { id: 'stone', label: 'Stone', hex: '#9c948a' },
+  { id: 'sage', label: 'Sage', hex: '#8a9a88' },
+  { id: 'midnight', label: 'Midnight', hex: '#2c3540' },
 ]
+
+export const COTTON_THROW_COLORS = [...FABRIC_COLORS, { id: 'mauve', label: 'Mauve', hex: '#b89ca8' }]
 
 export const PRODUCTS = [
   {
@@ -35,7 +40,7 @@ export const PRODUCTS = [
     name: 'Cotton Throw',
     price: 62,
     category: 'Bedding',
-    colors: FABRIC_COLORS,
+    colors: COTTON_THROW_COLORS,
     description: 'Woven cotton in a soft herringbone. Oatmeal tone, generous drape for sofa or bed.',
     materials: '100% cotton. Machine wash cold, tumble low.',
     images: [u('photo-1620832401018-30259b006ffe'), u('photo-1598622444660-9d76ceeb7daf')],
@@ -107,7 +112,7 @@ export const PRODUCTS = [
     category: 'Home',
     description: 'Unscented beeswax, cotton wick. ~40 hour burn, soft honeyed glow.',
     materials: 'Pure beeswax, cotton wick. Trim wick to ¼" before each use.',
-    images: [u('photo-1608571423902-eed4a5ad8108'), u('photo-1582735689369-4fe89db7114c')],
+    images: [u('photo-1544025162-d76694265947'), u('photo-1608571423902-eed994a56cd2')],
     stock: 90,
   },
   {
@@ -130,7 +135,7 @@ export const PRODUCTS = [
     colors: FABRIC_COLORS,
     description: 'Waffle knit cotton robe with belt tie. One size, natural undyed tone.',
     materials: '100% cotton. Machine wash cold, tumble low.',
-    images: [u('photo-1562157873-18bcce99693d'), u('photo-1631217868264-e5b90bb7e133')],
+    images: [u('photo-1620799140408-ed534d64d0b5'), u('photo-1631217868264-e5b90bb7e133')],
     stock: 22,
   },
   {
@@ -168,7 +173,7 @@ export const COLLECTIONS = [
     slug: 'loungewear',
     title: 'Loungewear',
     filter: 'Loungewear',
-    image: u('photo-1562157873-18bcce99693d'),
+    image: u('photo-1620799140408-ed534d64d0b5'),
   },
 ]
 
