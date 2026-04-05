@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
+/** GitHub Pages needs `/lune-store/`; local dev uses `/` so http://localhost:5173/ works. */
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: '/lune-store/',
-})
+  base: mode === 'production' ? '/lune-store/' : '/',
+}))

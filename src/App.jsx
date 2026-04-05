@@ -39,6 +39,9 @@ import Addresses from './pages/account/Addresses'
 import Profile from './pages/account/Profile'
 import Password from './pages/account/Password'
 
+const routerBasename =
+  import.meta.env.BASE_URL.length > 1 ? import.meta.env.BASE_URL.replace(/\/$/, '') : undefined
+
 export default function App() {
   return (
     <ToastProvider>
@@ -49,7 +52,7 @@ export default function App() {
               <ReturnsProvider>
                 <AddressesProvider>
                   <CheckoutProvider>
-                    <BrowserRouter basename="/lune-store">
+                    <BrowserRouter basename={routerBasename}>
                       <Routes>
                         <Route element={<MainLayout />}>
                           <Route path="/" element={<Home />} />

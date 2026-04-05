@@ -79,7 +79,7 @@ export function AuthProvider({ children }) {
   const resetPassword = async (email) => {
     if (isSupabaseConfigured && supabase) {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/lune-store/login`,
+        redirectTo: `${window.location.origin}${import.meta.env.BASE_URL.replace(/\/$/, '')}/login`,
       })
       if (error) throw error
       return
