@@ -19,8 +19,8 @@ export const FABRIC_COLORS = [
 
 export const COTTON_THROW_COLORS = [...FABRIC_COLORS, { id: 'mauve', label: 'Mauve', hex: '#b89ca8' }]
 
-/** Linen tote hero — used as Carry collection + woven bag listing cover. */
-const LINEN_TOTE_COVER = u('photo-1698834318982-f9c5b35dc90a')
+/** Linen tote hero — same URL as Linen Tote PDP; Carry tile + woven bag first image. */
+const LINEN_TOTE_COVER = u('photo-1535981444082-2a5dc0548ef3')
 
 /**
  * When set, selecting a color updates the PDP image to this index (0-based).
@@ -160,8 +160,8 @@ export const PRODUCTS = [
     description: 'Waffle knit cotton robe with belt tie. One size, natural undyed tone.',
     materials: '100% cotton. Machine wash cold, tumble low.',
     images: [
-      u('photo-1759221778524-69d10f928aed'),
-      u('photo-1609535895148-cf9f5c446290'),
+      u('photo-1645828258540-4bdc95e904cc'),
+      u('photo-1759221778500-84537e318452'),
     ],
     stock: 22,
   },
@@ -196,13 +196,18 @@ export const PRODUCTS = [
 export const COLLECTIONS = [
   { slug: 'home', title: 'Home Essentials', filter: 'Home', image: u('photo-1633169761411-c28abf790f98') },
   { slug: 'kitchen', title: 'Kitchen & Table', filter: 'Kitchen', image: u('photo-1545874239-30867bd8f206') },
-  { slug: 'carry', title: 'Carry', filter: 'Carry', image: LINEN_TOTE_COVER },
+  {
+    slug: 'carry',
+    title: 'Carry',
+    filter: 'Carry',
+    image: PRODUCTS.find((p) => p.slug === 'linen-tote').images[0],
+  },
   { slug: 'bedding', title: 'Bedding & Bath', filter: 'Bedding', image: u('photo-1721073956820-644a71ba075e') },
   {
     slug: 'loungewear',
     title: 'Loungewear',
     filter: 'Loungewear',
-    image: u('photo-1620799140408-ed534d64d0b5'),
+    image: u('photo-1645828258540-4bdc95e904cc'),
   },
 ]
 
