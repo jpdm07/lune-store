@@ -159,7 +159,10 @@ export const PRODUCTS = [
     colors: FABRIC_COLORS,
     description: 'Waffle knit cotton robe with belt tie. One size, natural undyed tone.',
     materials: '100% cotton. Machine wash cold, tumble low.',
-    images: [u('photo-1620799140408-ed534d64d0b5'), u('photo-1631217868264-e5b90bb7e133')],
+    images: [
+      u('photo-1759221778524-69d10f928aed'),
+      u('photo-1609535895148-cf9f5c446290'),
+    ],
     stock: 22,
   },
   {
