@@ -1,5 +1,8 @@
 # Builds the Vite production bundle and publishes the `dist/` folder to the `gh-pages` branch.
 # Result: https://jpdm07.github.io/lune-store/ (configure Pages to serve from `gh-pages` / root).
+#
+# Deployments / gh-pages history: each publish commit should describe what shipped (mirror `main`'s
+# commit message on push; explicit manual text on workflow_dispatch)—not one repeated generic title.
 
 name: GitHub Pages — LUNE storefront
 
@@ -8,8 +11,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Surface the triggering commit subject on push so Actions history reads like real work, not a generic deploy.
-run-name: ${{ github.event_name == 'workflow_dispatch' && 'Deploy LUNE storefront (manual run)' || github.event.head_commit.message }}
+# Prefer the same subject line as the push to `main` so the Actions list matches your real work.
+# (Keep commit subjects single-line when possible—multi-line subjects can look noisy here.)
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('LUNE Pages — manual deploy ({0})', github.sha) || github.event.head_commit.message }}
 
 permissions:
   contents: write
@@ -38,7 +42,35 @@ jobs:
       - name: Build static site (Vite)
         run: npm run build
 
-      # First line of this commit is what GitHub shows on Deployments; mirror main's subject (specific), not a generic "Deploy: …" label.
+      # GitHub Deployments / gh-pages branch: first line is what people skim—reuse the real app
+      # commit message on push; on manual runs, say so clearly with actor + SHA.
+      - name: Compose gh-pages commit message
+        id: pages_commit
+        env:
+          HEAD_MESSAGE: ${{ github.event.head_commit.message }}
+          EVENT_NAME: ${{ github.event_name }}
+          SHA: ${{ github.sha }}
+          REF_NAME: ${{ github.ref_name }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          SHORT="${SHA:0:7}"
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            MSG="chore(pages): manual LUNE storefront deploy (${SHORT})
+
+          workflow_dispatch by ${ACTOR}. Checkout SHA ${SHA} (${REF_NAME})."
+          else
+            MSG="${HEAD_MESSAGE}
+
+          —
+          gh-pages publish from ${REF_NAME} · ${SHA}"
+          fi
+          {
+            echo "full<<PAGES_MSG_EOF"
+            printf '%s\n' "$MSG"
+            echo "PAGES_MSG_EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Publish to GitHub Pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -46,4 +78,4 @@ jobs:
           publish_dir: ./dist
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
-          full_commit_message: ${{ github.event.head_commit.message || format('chore(pages): LUNE manual gh-pages publish ({0})', github.sha) }}
+          full_commit_message: ${{ steps.pages_commit.outputs.full }}
