@@ -100,7 +100,8 @@ export const PRODUCTS = [
     name: 'Ceramic Mug',
     price: 24,
     category: 'Kitchen',
-    description: 'Hand-finished stoneware with a matte glaze. Holds 12 oz; comfortable lip and handle.',
+    description:
+      'Two hand-finished stoneware mugs — classic matte glaze or speckled stoneware. Pick the finish you want; each holds 12 oz with a comfortable lip and handle.',
     materials: 'Stoneware, food-safe glaze. Dishwasher safe; microwave safe.',
     images: [u('photo-1514228742587-6b1558fcca3d'), u('photo-1612285761051-d5eef9e88e86')],
     styles: [
