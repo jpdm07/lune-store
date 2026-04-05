@@ -19,6 +19,23 @@ export const FABRIC_COLORS = [
 
 export const COTTON_THROW_COLORS = [...FABRIC_COLORS, { id: 'mauve', label: 'Mauve', hex: '#b89ca8' }]
 
+/** Linen tote hero — used as Carry collection + woven bag listing cover. */
+const LINEN_TOTE_COVER = u('photo-1698834318982-f9c5b35dc90a')
+
+/**
+ * When set, selecting a color updates the PDP image to this index (0-based).
+ * Colors omitted here fall back to `defaultColorImageIndex` or 0.
+ */
+export function getImageIndexForColor(product, colorId) {
+  const map = product.colorToImage
+  if (!map || typeof map !== 'object') return product.defaultColorImageIndex ?? 0
+  if (Object.prototype.hasOwnProperty.call(map, colorId)) {
+    const idx = map[colorId]
+    if (typeof idx === 'number' && idx >= 0 && idx < product.images.length) return idx
+  }
+  return product.defaultColorImageIndex ?? 0
+}
+
 export const PRODUCTS = [
   {
     id: 'p1',
@@ -31,7 +48,7 @@ export const PRODUCTS = [
       'Natural undyed linen with double-stitched handles. Light enough for daily carry, strong enough for market runs.',
     materials:
       '100% European flax linen. Spot clean; cold wash separately when needed. Line dry.',
-    images: [u('photo-1698834318982-f9c5b35dc90a')],
+    images: [LINEN_TOTE_COVER],
     stock: 40,
   },
   {
@@ -44,6 +61,7 @@ export const PRODUCTS = [
     description: 'Woven cotton in a soft herringbone. Oatmeal tone, generous drape for sofa or bed.',
     materials: '100% cotton. Machine wash cold, tumble low.',
     images: [u('photo-1620832401018-30259b006ffe'), u('photo-1598622444660-9d76ceeb7daf')],
+    colorToImage: { natural: 0, mauve: 1 },
     stock: 55,
   },
   {
@@ -79,6 +97,8 @@ export const PRODUCTS = [
     description: 'Two pillowcases in stonewashed linen. Natural tone, breathable for sleep.',
     materials: '100% linen. Machine wash cold, tumble low.',
     images: [u('photo-1609587611471-be23d7344d81'), u('photo-1721073956820-644a71ba075e')],
+    colorToImage: { midnight: 0, natural: 1 },
+    defaultColorImageIndex: 0,
     stock: 44,
   },
   {
@@ -102,6 +122,7 @@ export const PRODUCTS = [
     description: 'Set of four napkins with a minimalist hem. Natural linen.',
     materials: '100% linen. Machine wash cold.',
     images: [u('photo-1596433904500-97b901c5d274'), u('photo-1705290304352-4beef0b626b3')],
+    colorToImage: { oat: 1 },
     stock: 60,
   },
   {
@@ -112,7 +133,10 @@ export const PRODUCTS = [
     category: 'Home',
     description: 'Unscented beeswax, cotton wick. ~40 hour burn, soft honeyed glow.',
     materials: 'Pure beeswax, cotton wick. Trim wick to ¼" before each use.',
-    images: [u('photo-1544025162-d76694265947'), u('photo-1608571423902-eed994a56cd2')],
+    images: [
+      u('photo-1771911434558-6b85496cf608'),
+      u('photo-1608263153703-caa6b0fd7bc7'),
+    ],
     stock: 90,
   },
   {
@@ -147,7 +171,7 @@ export const PRODUCTS = [
     colors: FABRIC_COLORS,
     description: 'Seagrass weave with leather handles. Structured base, farmers-market ready.',
     materials: 'Seagrass, leather handles. Wipe clean; avoid prolonged moisture.',
-    images: [u('photo-1627202626612-1e304a201b32')],
+    images: [LINEN_TOTE_COVER, u('photo-1627202626612-1e304a201b32')],
     stock: 38,
   },
   {
@@ -160,6 +184,8 @@ export const PRODUCTS = [
     description: '14 × 72 inches, stonewashed linen with fringe ends.',
     materials: '100% linen. Machine wash cold, line dry preferred.',
     images: [u('photo-1762539747176-5d8f166346de'), u('photo-1758810744738-6eebece715a9')],
+    colorToImage: { stone: 0, sage: 1 },
+    defaultColorImageIndex: 0,
     stock: 48,
   },
 ]
@@ -167,7 +193,7 @@ export const PRODUCTS = [
 export const COLLECTIONS = [
   { slug: 'home', title: 'Home Essentials', filter: 'Home', image: u('photo-1633169761411-c28abf790f98') },
   { slug: 'kitchen', title: 'Kitchen & Table', filter: 'Kitchen', image: u('photo-1545874239-30867bd8f206') },
-  { slug: 'carry', title: 'Carry', filter: 'Carry', image: u('photo-1709303014108-5d988f63864f') },
+  { slug: 'carry', title: 'Carry', filter: 'Carry', image: LINEN_TOTE_COVER },
   { slug: 'bedding', title: 'Bedding & Bath', filter: 'Bedding', image: u('photo-1721073956820-644a71ba075e') },
   {
     slug: 'loungewear',

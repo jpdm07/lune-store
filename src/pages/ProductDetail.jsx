@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import PageFade from '../components/PageFade'
 import LazyImg from '../components/LazyImg'
 import ProductCard from '../components/ProductCard'
-import { getProductBySlug, getRelated } from '../data/products'
+import { getProductBySlug, getRelated, getImageIndexForColor } from '../data/products'
 import { getReviewsByProductSlug, getReviewStatsForProduct, formatReviewDate } from '../data/reviews'
 import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
@@ -22,10 +22,17 @@ export default function ProductDetail() {
   const { toast } = useToast()
 
   useEffect(() => {
-    setImgI(0)
     setQty(1)
     setColorId('natural')
+    const prod = getProductBySlug(slug)
+    if (prod) setImgI(getImageIndexForColor(prod, 'natural'))
   }, [slug])
+
+  useEffect(() => {
+    const prod = getProductBySlug(slug)
+    if (!prod) return
+    setImgI(getImageIndexForColor(prod, colorId))
+  }, [colorId])
 
   if (!p) {
     return (
