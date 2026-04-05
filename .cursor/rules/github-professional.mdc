@@ -1,0 +1,23 @@
+---
+description: Professional commit messages and GitHub-visible metadata for this repo
+alwaysApply: true
+---
+
+# Git and GitHub — professional presentation
+
+Anything that appears on GitHub (commits, PRs, Actions runs, deploy branch commits, releases) should read clearly to collaborators and future you.
+
+## Commits
+
+- **Subject**: One imperative line, specific scope (e.g. `feat(store): map robe colors to PDP images`). Never leave empty or use placeholders like `wip`, `fix`, or `updates` alone.
+- **Body**: After a blank line, add short bullets for non-trivial changes: what changed, why, and user-facing or deploy impact.
+
+## Pull requests
+
+- **Title**: Describes the outcome, not only the filename.
+- **Description**: Scope, how to verify, and links to related issues or case studies when relevant.
+
+## GitHub Actions
+
+- Prefer clear workflow `name`, optional `run-name`, and per-step `name` values.
+- For deploy actions that commit (e.g. `gh-pages`), use a descriptive commit message when the action supports it so the branch history stays readable.

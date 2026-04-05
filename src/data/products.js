@@ -24,9 +24,6 @@ export const COTTON_THROW_COLORS = [
   { id: 'mauve', label: 'Mauve', hex: '#b89ca8' },
 ]
 
-/** Robe PDP: single colorway (white). */
-export const ROBE_WHITE = { id: 'white', label: 'White', hex: '#f4f2ef' }
-
 /** Linen tote hero — Linen Tote PDP + Collections → Carry tile only (not used on woven bag). */
 const LINEN_TOTE_COVER = u('photo-1535981444082-2a5dc0548ef3')
 
@@ -226,18 +223,19 @@ export const PRODUCTS = [
     name: 'Cotton Robe',
     price: 88,
     category: 'Loungewear',
-    colors: [ROBE_WHITE],
+    colors: [
+      { id: 'soft-ivory', label: 'Soft ivory', hex: '#ebe6de' },
+      { id: 'candy-stripe', label: 'Candy stripe', hex: '#e7c0c0' },
+    ],
     description:
-      'Soft white waffle cotton in two silhouettes: a belted wrap and a relaxed open front. One size.',
+      'Breathable cotton waffle in two colorways: soft ivory and a red-and-white candy stripe. One size; belted wrap with patch pockets.',
     materials: '100% cotton. Machine wash cold, tumble low.',
     images: [
-      u('photo-1770294759006-356f25f4f156'),
+      u('photo-1770294759101-fae1377d4d34'),
       u('photo-1652882661319-71df33e40cc6'),
     ],
-    styles: [
-      { id: 'belted-wrap', label: 'Belted wrap', imageIndex: 0 },
-      { id: 'open-front', label: 'Open front', imageIndex: 1 },
-    ],
+    colorToImage: { 'soft-ivory': 0, 'candy-stripe': 1 },
+    defaultColorImageIndex: 0,
     specs: [
       { label: 'Fit', value: "One size — best for women's S–L / men's S–M" },
       { label: 'Length', value: 'Approx. 48" (122 cm) from shoulder' },
@@ -298,7 +296,7 @@ export const COLLECTIONS = [
     slug: 'loungewear',
     title: 'Loungewear',
     filter: 'Loungewear',
-    image: u('photo-1770294759006-356f25f4f156'),
+    image: u('photo-1770294759101-fae1377d4d34'),
   },
 ]
 
