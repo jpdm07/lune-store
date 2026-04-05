@@ -208,9 +208,14 @@ export const PRODUCTS = [
     name: 'Ceramic Vase',
     price: 48,
     category: 'Home',
-    description: 'Organic silhouette with matte terracotta glaze. Sized for a small bouquet.',
+    description:
+      'Two stoneware silhouettes — warm matte terracotta or a cool neutral column. Choose the one that fits your stems; each is sized for a small bouquet.',
     materials: 'Stoneware. Wipe clean; not dishwasher recommended.',
     images: [u('photo-1660958639203-cbc9bb56955b'), u('photo-1584515453937-c00929e621d1')],
+    styles: [
+      { id: 'matte-terracotta', label: 'Matte terracotta', imageIndex: 0 },
+      { id: 'neutral-column', label: 'Neutral column', imageIndex: 1 },
+    ],
     specs: [
       { label: 'Height', value: 'Approx. 8" (20 cm)' },
       { label: 'Opening', value: 'Approx. 4" (10 cm) diameter' },
