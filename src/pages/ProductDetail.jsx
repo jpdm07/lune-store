@@ -153,7 +153,13 @@ export default function ProductDetail() {
                     >
                       <span
                         className={styles.swatchFill}
-                        style={{ backgroundColor: c.hex ?? '#d6d3d1' }}
+                        style={
+                          c.hex2
+                            ? {
+                                background: `linear-gradient(90deg, ${c.hex ?? '#d6d3d1'} 50%, ${c.hex2} 50%)`,
+                              }
+                            : { backgroundColor: c.hex ?? '#d6d3d1' }
+                        }
                       />
                     </button>
                   ))}

@@ -9,7 +9,8 @@ const u = (id, w = 900) =>
 
 /**
  * Fabric color options — `hex` drives the round swatch on the product page.
- * (Concept SKUs; imagery stays the same per product.)
+ * Optional `hex2`: when set, the swatch is split half `hex` / half `hex2` (e.g. stripe patterns).
+ * (Concept SKUs; imagery stays the same per product unless `colorToImage` is set.)
  */
 export const FABRIC_COLORS = [
   { id: 'natural', label: 'Natural', hex: '#e8dfd4' },
@@ -227,23 +228,14 @@ export const PRODUCTS = [
       {
         id: 'red-white-stripe',
         label: 'Red & white stripe',
-        hex: '#d84c4c',
-      },
-      {
-        id: 'dusty-blue',
-        label: 'Dusty blue',
-        hex: '#6e8aad',
+        hex: '#c41e3a',
+        hex2: '#ffffff',
       },
     ],
     description:
-      'Breathable cotton waffle: a red-and-white stripe and a cool dusty-blue waffle knit. One size; belted wrap with patch pockets.',
+      'Breathable cotton waffle in a red-and-white stripe. One size; belted wrap with patch pockets.',
     materials: '100% cotton. Machine wash cold, tumble low.',
-    images: [
-      u('photo-1766727923624-2e8eede5aa8c'),
-      u('photo-1652882661319-71df33e40cc6'),
-    ],
-    colorToImage: { 'dusty-blue': 0, 'red-white-stripe': 1 },
-    defaultColorImageIndex: 1,
+    images: [u('photo-1652882661319-71df33e40cc6')],
     specs: [
       { label: 'Fit', value: "One size — best for women's S–L / men's S–M" },
       { label: 'Length', value: 'Approx. 48" (122 cm) from shoulder' },
