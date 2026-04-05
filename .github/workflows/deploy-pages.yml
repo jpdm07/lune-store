@@ -38,6 +38,7 @@ jobs:
       - name: Build static site (Vite)
         run: npm run build
 
+      # First line of this commit is what GitHub shows on Deployments; mirror main's subject (specific), not a generic "Deploy: …" label.
       - name: Publish to GitHub Pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -45,9 +46,4 @@ jobs:
           publish_dir: ./dist
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
-          full_commit_message: |
-            gh-pages: production build from ${{ github.sha }}
-
-            Source (main): ${{ github.event.head_commit.message || '—' }}
-
-            Trigger: ${{ github.event_name }} by ${{ github.actor }} · ref ${{ github.ref_name }}
+          full_commit_message: ${{ github.event.head_commit.message || format('chore(pages): LUNE manual gh-pages publish ({0})', github.sha) }}

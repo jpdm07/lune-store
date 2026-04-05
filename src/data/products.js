@@ -101,13 +101,13 @@ export const PRODUCTS = [
     price: 24,
     category: 'Kitchen',
     description:
-      'Two hand-finished stoneware mugs — classic matte glaze or speckled stoneware. Pick the finish you want; each holds 12 oz with a comfortable lip and handle.',
+      'Two hand-finished stoneware mugs: classic matte white or plain dark matte. Pick the finish you want; each holds 12 oz with a comfortable lip and handle.',
     materials: 'Stoneware, food-safe glaze. Dishwasher safe; microwave safe.',
     // Plain mugs only (no logo/print): matte white + dark stoneware, minimal backgrounds (Unsplash).
     images: [u('photo-1616241673111-508b4662c707'), u('photo-1518358246973-95637f1df901')],
     styles: [
       { id: 'classic-matte', label: 'Classic matte', imageIndex: 0 },
-      { id: 'speckled-stoneware', label: 'Speckled stoneware', imageIndex: 1 },
+      { id: 'dark-matte', label: 'Dark matte', imageIndex: 1 },
     ],
     specs: [
       { label: 'Capacity', value: '12 fl oz (355 ml)' },
