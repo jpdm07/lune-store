@@ -1,28 +1,43 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { PRODUCTS } from '../data/products'
+import { PRODUCTS, getPrimaryImageIndex } from '../data/products'
 
 const CartContext = createContext(null)
 const STORAGE = 'lune_cart_v2'
 
 const PROMOS = { LUNE10: 0.1, WELCOME15: 0.15 }
 
-export function cartLineId(slug, colorId = 'natural') {
+export function cartLineId(slug, colorId = 'natural', styleId) {
+  if (styleId != null && String(styleId).length > 0) return `${slug}::${colorId}::${styleId}`
   return `${slug}::${colorId}`
 }
 
 function normalizeLine(raw) {
   const p = PRODUCTS.find((x) => x.slug === raw.slug)
   if (!p) return null
-  const colorId = raw.colorId || 'natural'
+  let colorId = raw.colorId || 'natural'
+  if (p.colors?.length && !p.colors.some((c) => c.id === colorId)) {
+    colorId = p.colors[0].id
+  }
   const col = p.colors?.find((c) => c.id === colorId)
+  const styleIdResolved =
+    raw.styleId != null && raw.styleId !== ''
+      ? raw.styleId
+      : p.styles?.length
+        ? p.styles[0].id
+        : undefined
+  const st = p.styles?.find((s) => s.id === styleIdResolved)
+  const imgIdx = getPrimaryImageIndex(p, colorId, styleIdResolved)
+  const image = p.images?.[imgIdx] || p.images?.[0] || ''
   return {
-    id: cartLineId(raw.slug, colorId),
+    id: cartLineId(p.slug, colorId, st ? styleIdResolved : undefined),
     slug: p.slug,
     colorId,
     colorLabel: col?.label || raw.colorLabel || 'Natural',
+    styleId: st ? styleIdResolved : undefined,
+    styleLabel: st?.label || raw.styleLabel || '',
     name: p.name,
     price: p.price,
-    image: p.images?.[0] || '',
+    image,
     qty: Math.max(1, Number(raw.qty) || 1),
   }
 }
@@ -48,10 +63,22 @@ export function CartProvider({ children }) {
   }, [items, promo])
 
   const addItem = (product, qty = 1, opts = {}) => {
-    const colorId = opts.colorId || 'natural'
+    let colorId = opts.colorId || 'natural'
+    if (product.colors?.length && !product.colors.some((c) => c.id === colorId)) {
+      colorId = product.colors[0].id
+    }
     const col = product.colors?.find((c) => c.id === colorId)
     const colorLabel = col?.label || 'Natural'
-    const id = cartLineId(product.slug, colorId)
+    const styleIdResolved =
+      opts.styleId != null && opts.styleId !== ''
+        ? opts.styleId
+        : product.styles?.length
+          ? product.styles[0].id
+          : undefined
+    const st = product.styles?.find((s) => s.id === styleIdResolved)
+    const imgIdx = getPrimaryImageIndex(product, colorId, styleIdResolved)
+    const image = product.images?.[imgIdx] || product.images?.[0] || ''
+    const id = cartLineId(product.slug, colorId, st ? styleIdResolved : undefined)
     setItems((prev) => {
       const i = prev.findIndex((x) => x.id === id)
       if (i >= 0) {
@@ -66,9 +93,11 @@ export function CartProvider({ children }) {
           slug: product.slug,
           colorId,
           colorLabel,
+          styleId: st ? styleIdResolved : undefined,
+          styleLabel: st?.label || '',
           name: product.name,
           price: product.price,
-          image: product.images[0],
+          image,
           qty,
         },
       ]
@@ -131,6 +160,14 @@ export function useCart() {
   const ctx = useContext(CartContext)
   if (!ctx) throw new Error('useCart needs CartProvider')
   return ctx
+}
+
+/** Color + style summary for cart and order lines (hides lone “Natural”). */
+export function cartLineVariantText(line) {
+  const parts = []
+  if (line.styleLabel) parts.push(line.styleLabel)
+  if (line.colorLabel && line.colorId !== 'natural') parts.push(line.colorLabel)
+  return parts.join(' · ')
 }
 
 export function findProduct(slug) {

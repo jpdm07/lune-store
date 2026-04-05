@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import PageFade from '../components/PageFade'
-import { useCart } from '../context/CartContext'
+import { useCart, cartLineVariantText } from '../context/CartContext'
 import { useState } from 'react'
 import styles from './Cart.module.css'
 
@@ -37,7 +37,9 @@ export default function Cart() {
         <h1 className={styles.h1}>Cart</h1>
         <div className={styles.layout}>
           <ul className={styles.list}>
-            {items.map((line) => (
+            {items.map((line) => {
+              const variant = cartLineVariantText(line)
+              return (
               <li key={line.id} className={styles.row}>
                 <Link to={`/shop/${line.slug}`} className={styles.thumbLink} aria-label={`View ${line.name}`}>
                   <img src={line.image} alt="" className={styles.thumb} />
@@ -46,9 +48,7 @@ export default function Cart() {
                   <Link to={`/shop/${line.slug}`} className={styles.name}>
                     {line.name}
                   </Link>
-                  {line.colorLabel && line.colorLabel !== 'Natural' && (
-                    <p className={styles.variant}>{line.colorLabel}</p>
-                  )}
+                  {variant && <p className={styles.variant}>{variant}</p>}
                   <p className={styles.price}>${line.price}</p>
                   <div className={styles.qty}>
                     <button type="button" onClick={() => updateQty(line.id, line.qty - 1)}>
@@ -64,7 +64,8 @@ export default function Cart() {
                   ×
                 </button>
               </li>
-            ))}
+              )
+            })}
           </ul>
           <aside className={styles.sum}>
             <form onSubmit={tryPromo} className={styles.promo}>

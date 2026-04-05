@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import PageFade from '../components/PageFade'
-import { useCart } from '../context/CartContext'
+import { useCart, cartLineVariantText } from '../context/CartContext'
 import { useCheckoutDraft } from '../context/CheckoutContext'
 import { useOrders } from '../context/OrdersContext'
 import { useAuth } from '../context/AuthContext'
@@ -79,13 +79,16 @@ export default function CheckoutConfirmation() {
         <div className={styles.summary}>
           <h2 className={styles.sideH}>Order summary</h2>
           <ul className={styles.sumList}>
-            {snap.items.map((l) => (
+            {snap.items.map((l) => {
+              const v = cartLineVariantText(l)
+              return (
               <li key={l.id || `${l.slug}-${l.colorId || 'natural'}`}>
                 {l.name}
-                {l.colorLabel && l.colorLabel !== 'Natural' ? ` (${l.colorLabel})` : ''} × {l.qty} — $
+                {v ? ` (${v})` : ''} × {l.qty} — $
                 {(l.price * l.qty).toFixed(2)}
               </li>
-            ))}
+              )
+            })}
           </ul>
           <p className={styles.totalLine}>Total paid ${snap.total.toFixed(2)}</p>
         </div>

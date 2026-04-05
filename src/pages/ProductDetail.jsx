@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import PageFade from '../components/PageFade'
 import LazyImg from '../components/LazyImg'
 import ProductCard from '../components/ProductCard'
-import { getProductBySlug, getRelated, getImageIndexForColor } from '../data/products'
+import { getProductBySlug, getRelated, getPrimaryImageIndex } from '../data/products'
 import { getReviewsByProductSlug, getReviewStatsForProduct, formatReviewDate } from '../data/reviews'
 import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
@@ -16,23 +16,28 @@ export default function ProductDetail() {
   const [imgI, setImgI] = useState(0)
   const [qty, setQty] = useState(1)
   const [colorId, setColorId] = useState('natural')
+  const [styleId, setStyleId] = useState(null)
   const [open, setOpen] = useState({ d: true, m: false, s: false })
   const { addItem } = useCart()
   const { toggle, has } = useWishlist()
   const { toast } = useToast()
 
   useEffect(() => {
-    setQty(1)
-    setColorId('natural')
     const prod = getProductBySlug(slug)
-    if (prod) setImgI(getImageIndexForColor(prod, 'natural'))
+    setQty(1)
+    if (!prod) return
+    const c0 = prod.colors?.[0]?.id ?? 'natural'
+    const s0 = prod.styles?.[0]?.id ?? null
+    setColorId(c0)
+    setStyleId(s0)
+    setImgI(getPrimaryImageIndex(prod, c0, s0))
   }, [slug])
 
   useEffect(() => {
     const prod = getProductBySlug(slug)
     if (!prod) return
-    setImgI(getImageIndexForColor(prod, colorId))
-  }, [colorId])
+    setImgI(getPrimaryImageIndex(prod, colorId, styleId))
+  }, [slug, colorId, styleId])
 
   if (!p) {
     return (
@@ -48,9 +53,12 @@ export default function ProductDetail() {
   const related = getRelated(slug, 4)
   const productReviews = getReviewsByProductSlug(p.slug)
   const { avg, count } = getReviewStatsForProduct(p.slug)
+  const selectedStyleId = p.styles?.length ? styleId ?? p.styles[0].id : null
 
   const add = () => {
-    for (let i = 0; i < qty; i++) addItem(p, 1, { colorId: p.colors ? colorId : 'natural' })
+    const sid = p.styles?.length ? selectedStyleId : undefined
+    for (let i = 0; i < qty; i++)
+      addItem(p, 1, { colorId: p.colors ? colorId : 'natural', styleId: sid })
     toast('Added to cart')
   }
 
@@ -72,7 +80,13 @@ export default function ProductDetail() {
                     key={i}
                     type="button"
                     className={i === imgI ? styles.thOn : styles.th}
-                    onClick={() => setImgI(i)}
+                    onClick={() => {
+                      setImgI(i)
+                      if (p.styles?.length) {
+                        const st = p.styles.find((s) => s.imageIndex === i)
+                        if (st) setStyleId(st.id)
+                      }
+                    }}
                   >
                     <img src={src} alt="" />
                   </button>
@@ -102,6 +116,25 @@ export default function ProductDetail() {
                   </div>
                 ))}
               </dl>
+            )}
+            {p.styles && p.styles.length > 0 && (
+              <div className={styles.styleBlock}>
+                <span className={styles.colorLabel}>Style</span>
+                <div className={styles.styleChips} role="listbox" aria-label="Style">
+                  {p.styles.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      role="option"
+                      aria-selected={selectedStyleId === s.id}
+                      className={selectedStyleId === s.id ? styles.styleChipOn : styles.styleChip}
+                      onClick={() => setStyleId(s.id)}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             )}
             {p.colors && p.colors.length > 0 && (
               <div className={styles.colorBlock}>

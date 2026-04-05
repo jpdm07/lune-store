@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useCart } from '../context/CartContext'
+import { useCart, cartLineVariantText } from '../context/CartContext'
 import styles from './CartDrawer.module.css'
 
 export default function CartDrawer({ open, onClose }) {
@@ -42,7 +42,9 @@ export default function CartDrawer({ open, onClose }) {
               <p className={styles.empty}>Your cart is empty.</p>
             ) : (
               <ul className={styles.list}>
-                {items.map((line) => (
+                {items.map((line) => {
+                  const variant = cartLineVariantText(line)
+                  return (
                   <li key={line.id} className={styles.row}>
                     <Link
                       to={`/shop/${line.slug}`}
@@ -56,9 +58,7 @@ export default function CartDrawer({ open, onClose }) {
                       <Link to={`/shop/${line.slug}`} className={styles.lineName} onClick={onClose}>
                         {line.name}
                       </Link>
-                      {line.colorLabel && line.colorLabel !== 'Natural' && (
-                        <span className={styles.variant}>{line.colorLabel}</span>
-                      )}
+                      {variant && <span className={styles.variant}>{variant}</span>}
                       <span className={styles.linePrice}>${line.price}</span>
                       <div className={styles.qty}>
                         <button type="button" onClick={() => updateQty(line.id, line.qty - 1)}>
@@ -79,7 +79,8 @@ export default function CartDrawer({ open, onClose }) {
                       ×
                     </button>
                   </li>
-                ))}
+                  )
+                })}
               </ul>
             )}
             {items.length > 0 && (

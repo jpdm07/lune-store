@@ -127,6 +127,49 @@
   }
 }
 
+.styleBlock {
+  margin-bottom: 20px;
+}
+
+.styleChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.styleChip,
+.styleChipOn {
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-base);
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.15s;
+}
+
+.styleChip:hover {
+  border-color: var(--color-muted);
+  transform: translateY(-1px);
+}
+
+.styleChipOn {
+  border-color: var(--color-base);
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 3px var(--color-base);
+}
+
+.styleChip:focus-visible,
+.styleChipOn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
 .colorBlock {
   margin-bottom: 20px;
 }

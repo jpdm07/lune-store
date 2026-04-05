@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useOrders } from '../../context/OrdersContext'
+import { cartLineVariantText } from '../../context/CartContext'
 import styles from './Account.module.css'
 
 export default function OrderDetail() {
@@ -30,14 +31,18 @@ export default function OrderDetail() {
           Timeline: Order placed → Processing → Shipped → Delivered (demo)
         </p>
         <ul className={styles.list} style={{ marginTop: 20 }}>
-          {o.items?.map((l) => (
-            <li key={l.slug} className={styles.orderRow} style={{ cursor: 'default' }}>
+          {o.items?.map((l) => {
+            const v = cartLineVariantText(l)
+            return (
+            <li key={l.id || l.slug} className={styles.orderRow} style={{ cursor: 'default' }}>
               <span>
-                {l.name} × {l.qty}
+                {l.name}
+                {v ? ` (${v})` : ''} × {l.qty}
               </span>
               <span>${(l.price * l.qty).toFixed(2)}</span>
             </li>
-          ))}
+            )
+          })}
         </ul>
         <p>
           <strong>Shipping to</strong>

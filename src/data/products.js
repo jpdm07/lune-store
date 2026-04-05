@@ -19,9 +19,15 @@ export const FABRIC_COLORS = [
   { id: 'midnight', label: 'Midnight', hex: '#2c3540' },
 ]
 
-export const COTTON_THROW_COLORS = [...FABRIC_COLORS, { id: 'mauve', label: 'Mauve', hex: '#b89ca8' }]
+export const COTTON_THROW_COLORS = [
+  ...FABRIC_COLORS.filter((c) => c.id === 'natural'),
+  { id: 'mauve', label: 'Mauve', hex: '#b89ca8' },
+]
 
-/** Linen tote hero — same URL as Linen Tote PDP; Carry tile + woven bag first image. */
+/** Robe PDP: single colorway (white). */
+export const ROBE_WHITE = { id: 'white', label: 'White', hex: '#f4f2ef' }
+
+/** Linen tote hero — Linen Tote PDP + Collections → Carry tile only (not used on woven bag). */
 const LINEN_TOTE_COVER = u('photo-1535981444082-2a5dc0548ef3')
 
 /**
@@ -38,6 +44,18 @@ export function getImageIndexForColor(product, colorId) {
   return product.defaultColorImageIndex ?? 0
 }
 
+/**
+ * PDP / cart image: style wins when `product.styles` is set; otherwise color swatch mapping.
+ */
+export function getPrimaryImageIndex(product, colorId, styleId) {
+  if (product.styles?.length) {
+    const st = product.styles.find((s) => s.id === styleId) || product.styles[0]
+    const idx = st?.imageIndex
+    if (typeof idx === 'number' && idx >= 0 && idx < product.images.length) return idx
+  }
+  return getImageIndexForColor(product, colorId)
+}
+
 export const PRODUCTS = [
   {
     id: 'p1',
@@ -45,7 +63,7 @@ export const PRODUCTS = [
     name: 'Linen Tote',
     price: 38,
     category: 'Carry',
-    colors: FABRIC_COLORS,
+    colors: [FABRIC_COLORS[0]],
     description:
       'Natural undyed linen with double-stitched handles. Light enough for daily carry, strong enough for market runs.',
     materials:
@@ -66,7 +84,8 @@ export const PRODUCTS = [
     price: 62,
     category: 'Bedding',
     colors: COTTON_THROW_COLORS,
-    description: 'Woven cotton in a soft herringbone. Oatmeal tone, generous drape for sofa or bed.',
+    description:
+      'Woven cotton in a soft herringbone—natural or mauve—with a generous drape for sofa or bed.',
     materials: '100% cotton. Machine wash cold, tumble low.',
     images: [u('photo-1620832401018-30259b006ffe'), u('photo-1598622444660-9d76ceeb7daf')],
     colorToImage: { natural: 0, mauve: 1 },
@@ -86,6 +105,10 @@ export const PRODUCTS = [
     description: 'Hand-finished stoneware with a matte glaze. Holds 12 oz; comfortable lip and handle.',
     materials: 'Stoneware, food-safe glaze. Dishwasher safe; microwave safe.',
     images: [u('photo-1514228742587-6b1558fcca3d'), u('photo-1612285761051-d5eef9e88e86')],
+    styles: [
+      { id: 'classic-matte', label: 'Classic matte', imageIndex: 0 },
+      { id: 'speckled-stoneware', label: 'Speckled stoneware', imageIndex: 1 },
+    ],
     specs: [
       { label: 'Capacity', value: '12 fl oz (355 ml)' },
       { label: 'Dimensions', value: 'Approx. 3.5" H × 3.25" dia (9 × 8.3 cm)' },
@@ -99,8 +122,8 @@ export const PRODUCTS = [
     name: 'Wool Blanket',
     price: 95,
     category: 'Bedding',
-    colors: FABRIC_COLORS,
-    description: 'Merino wool in an earthy sand tone with a subtle fringe edge. Warm without weight.',
+    colors: FABRIC_COLORS.filter((c) => c.id === 'stone'),
+    description: 'Merino wool in a cool stone tone with a subtle fringe edge. Warm without weight.',
     materials: '100% merino wool. Dry clean recommended.',
     images: [u('photo-1638431110087-80c185015f94')],
     specs: [
@@ -116,8 +139,8 @@ export const PRODUCTS = [
     name: 'Linen Pillowcase Set',
     price: 58,
     category: 'Bedding',
-    colors: FABRIC_COLORS,
-    description: 'Two pillowcases in stonewashed linen. Natural tone, breathable for sleep.',
+    colors: FABRIC_COLORS.filter((c) => c.id === 'natural' || c.id === 'midnight'),
+    description: 'Two pillowcases in stonewashed linen—natural or midnight—breathable for sleep.',
     materials: '100% linen. Machine wash cold, tumble low.',
     images: [u('photo-1609587611471-be23d7344d81'), u('photo-1721073956820-644a71ba075e')],
     colorToImage: { midnight: 0, natural: 1 },
@@ -203,12 +226,17 @@ export const PRODUCTS = [
     name: 'Cotton Robe',
     price: 88,
     category: 'Loungewear',
-    colors: FABRIC_COLORS,
-    description: 'Waffle knit cotton robe with belt tie. One size, natural undyed tone.',
+    colors: [ROBE_WHITE],
+    description:
+      'Soft white waffle cotton in two silhouettes: a belted wrap and a relaxed open front. One size.',
     materials: '100% cotton. Machine wash cold, tumble low.',
     images: [
-      u('photo-1645828258540-4bdc95e904cc'),
-      u('photo-1759221778500-84537e318452'),
+      u('photo-1770294759006-356f25f4f156'),
+      u('photo-1652882661319-71df33e40cc6'),
+    ],
+    styles: [
+      { id: 'belted-wrap', label: 'Belted wrap', imageIndex: 0 },
+      { id: 'open-front', label: 'Open front', imageIndex: 1 },
     ],
     specs: [
       { label: 'Fit', value: "One size — best for women's S–L / men's S–M" },
@@ -227,7 +255,7 @@ export const PRODUCTS = [
     colors: FABRIC_COLORS,
     description: 'Seagrass weave with leather handles. Structured base, farmers-market ready.',
     materials: 'Seagrass, leather handles. Wipe clean; avoid prolonged moisture.',
-    images: [LINEN_TOTE_COVER, u('photo-1627202626612-1e304a201b32')],
+    images: [u('photo-1627202626612-1e304a201b32')],
     specs: [
       { label: 'Dimensions', value: '16" W × 12" H × 7" D (41 × 30 × 18 cm) body' },
       { label: 'Handle drop', value: 'Approx. 9" (23 cm)' },
@@ -270,7 +298,7 @@ export const COLLECTIONS = [
     slug: 'loungewear',
     title: 'Loungewear',
     filter: 'Loungewear',
-    image: u('photo-1645828258540-4bdc95e904cc'),
+    image: u('photo-1770294759006-356f25f4f156'),
   },
 ]
 
