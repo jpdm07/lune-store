@@ -224,18 +224,26 @@ export const PRODUCTS = [
     price: 88,
     category: 'Loungewear',
     colors: [
-      { id: 'soft-ivory', label: 'Soft ivory', hex: '#ebe6de' },
-      { id: 'candy-stripe', label: 'Candy stripe', hex: '#e7c0c0' },
+      {
+        id: 'red-white-stripe',
+        label: 'Red & white stripe',
+        hex: '#d84c4c',
+      },
+      {
+        id: 'dusty-blue',
+        label: 'Dusty blue',
+        hex: '#6e8aad',
+      },
     ],
     description:
-      'Breathable cotton waffle in two colorways: soft ivory and a red-and-white candy stripe. One size; belted wrap with patch pockets.',
+      'Breathable cotton waffle: a red-and-white stripe and a cool dusty-blue waffle knit. One size; belted wrap with patch pockets.',
     materials: '100% cotton. Machine wash cold, tumble low.',
     images: [
-      u('photo-1770294759101-fae1377d4d34'),
+      u('photo-1766727923624-2e8eede5aa8c'),
       u('photo-1652882661319-71df33e40cc6'),
     ],
-    colorToImage: { 'soft-ivory': 0, 'candy-stripe': 1 },
-    defaultColorImageIndex: 0,
+    colorToImage: { 'dusty-blue': 0, 'red-white-stripe': 1 },
+    defaultColorImageIndex: 1,
     specs: [
       { label: 'Fit', value: "One size — best for women's S–L / men's S–M" },
       { label: 'Length', value: 'Approx. 48" (122 cm) from shoulder' },
@@ -296,7 +304,7 @@ export const COLLECTIONS = [
     slug: 'loungewear',
     title: 'Loungewear',
     filter: 'Loungewear',
-    image: u('photo-1770294759101-fae1377d4d34'),
+    image: u('photo-1652882661319-71df33e40cc6'),
   },
 ]
 
