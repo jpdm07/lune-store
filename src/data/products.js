@@ -252,7 +252,7 @@ export const PRODUCTS = [
     name: 'Woven Market Bag',
     price: 42,
     category: 'Carry',
-    colors: FABRIC_COLORS,
+    colors: [FABRIC_COLORS[0]],
     description: 'Seagrass weave with leather handles. Structured base, farmers-market ready.',
     materials: 'Seagrass, leather handles. Wipe clean; avoid prolonged moisture.',
     images: [u('photo-1627202626612-1e304a201b32')],
