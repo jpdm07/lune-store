@@ -43,6 +43,26 @@ export function getImageIndexForColor(product, colorId) {
 }
 
 /**
+ * If `colorToImage` explicitly maps a color to `imageIndex`, return that color id (first match in
+ * `product.colors` order). Otherwise `null` — do not infer a swatch from defaults or unmapped colors.
+ */
+export function getColorIdForImageIndex(product, imageIndex) {
+  const map = product.colorToImage
+  if (!map || typeof map !== 'object') return null
+  const n = product.images?.length ?? 0
+  const ids = Object.keys(map).filter((cid) => {
+    const idx = map[cid]
+    return typeof idx === 'number' && idx === imageIndex && idx >= 0 && idx < n
+  })
+  if (ids.length === 0) return null
+  const order = product.colors?.map((c) => c.id) ?? []
+  for (const id of order) {
+    if (ids.includes(id)) return id
+  }
+  return ids[0]
+}
+
+/**
  * PDP / cart image: style wins when `product.styles` is set; otherwise color swatch mapping.
  */
 export function getPrimaryImageIndex(product, colorId, styleId) {

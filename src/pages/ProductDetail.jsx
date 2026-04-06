@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import PageFade from '../components/PageFade'
 import LazyImg from '../components/LazyImg'
 import ProductCard from '../components/ProductCard'
-import { getProductBySlug, getRelated, getPrimaryImageIndex } from '../data/products'
+import {
+  getProductBySlug,
+  getRelated,
+  getPrimaryImageIndex,
+  getColorIdForImageIndex,
+} from '../data/products'
 import { getReviewsByProductSlug, getReviewStatsForProduct, formatReviewDate } from '../data/reviews'
 import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
@@ -18,6 +23,8 @@ export default function ProductDetail() {
   const [colorId, setColorId] = useState('natural')
   const [styleId, setStyleId] = useState(null)
   const [open, setOpen] = useState({ d: true, m: false, s: false })
+  /** When true, main image follows thumbnail clicks even if no `colorToImage` entry (until swatch/style changes). */
+  const imageLockedByThumb = useRef(false)
   const { addItem } = useCart()
   const { toggle, has } = useWishlist()
   const { toast } = useToast()
@@ -28,6 +35,7 @@ export default function ProductDetail() {
     if (!prod) return
     const c0 = prod.colors?.[0]?.id ?? 'natural'
     const s0 = prod.styles?.[0]?.id ?? null
+    imageLockedByThumb.current = false
     setColorId(c0)
     setStyleId(s0)
     setImgI(getPrimaryImageIndex(prod, c0, s0))
@@ -36,7 +44,9 @@ export default function ProductDetail() {
   useEffect(() => {
     const prod = getProductBySlug(slug)
     if (!prod) return
-    setImgI(getPrimaryImageIndex(prod, colorId, styleId))
+    if (!imageLockedByThumb.current) {
+      setImgI(getPrimaryImageIndex(prod, colorId, styleId))
+    }
   }, [slug, colorId, styleId])
 
   if (!p) {
@@ -82,9 +92,23 @@ export default function ProductDetail() {
                     className={i === imgI ? styles.thOn : styles.th}
                     onClick={() => {
                       setImgI(i)
+                      let matchedVariant = false
                       if (p.styles?.length) {
                         const st = p.styles.find((s) => s.imageIndex === i)
-                        if (st) setStyleId(st.id)
+                        if (st) {
+                          imageLockedByThumb.current = false
+                          setStyleId(st.id)
+                          matchedVariant = true
+                        }
+                      }
+                      const mappedColor = getColorIdForImageIndex(p, i)
+                      if (mappedColor != null) {
+                        imageLockedByThumb.current = false
+                        setColorId(mappedColor)
+                        matchedVariant = true
+                      }
+                      if (!matchedVariant) {
+                        imageLockedByThumb.current = true
                       }
                     }}
                   >
@@ -128,7 +152,10 @@ export default function ProductDetail() {
                       role="option"
                       aria-selected={selectedStyleId === s.id}
                       className={selectedStyleId === s.id ? styles.styleChipOn : styles.styleChip}
-                      onClick={() => setStyleId(s.id)}
+                      onClick={() => {
+                        imageLockedByThumb.current = false
+                        setStyleId(s.id)
+                      }}
                     >
                       {s.label}
                     </button>
@@ -149,7 +176,10 @@ export default function ProductDetail() {
                       title={c.label}
                       aria-label={c.label}
                       className={colorId === c.id ? styles.colorSwatchOn : styles.colorSwatch}
-                      onClick={() => setColorId(c.id)}
+                      onClick={() => {
+                        imageLockedByThumb.current = false
+                        setColorId(c.id)
+                      }}
                     >
                       <span
                         className={styles.swatchFill}
